@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, Users, Globe2, Clock, Sparkles, MapPin } from "lucide-react";
 import heroImg from "@/assets/storefront.jpg";
+import { useLang } from "@/i18n/LanguageContext";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -14,25 +15,21 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-const values = [
-  { icon: Heart, title: "Treat people right", text: "Our customers are neighbors. We act like it." },
-  { icon: Clock, title: "Respect your time", text: "Fast in, fast out — without cutting corners." },
-  { icon: Globe2, title: "Hablamos Español", text: "Bilingual service so everyone feels at home." },
-  { icon: Sparkles, title: "Go the extra mile", text: "Free packing help, the cheapest shipping option, and a laugh on the way out." },
-];
+const valueIcons = [Heart, Clock, Globe2, Sparkles];
 
 function AboutPage() {
+  const { t } = useLang();
+  const values = t.about.values.map((v, i) => ({ ...v, icon: valueIcons[i] }));
   return (
     <>
       <section className="border-b border-border/60 bg-secondary/30 py-16">
         <div className="mx-auto max-w-7xl px-6 animate-fade-in-up">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">About us</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary">{t.about.kicker}</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
-            A small Fort Lauderdale shop with a big heart.
+            {t.about.h1}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            Riverland Postal has been serving the Davie Blvd neighborhood for years — packing,
-            shipping, printing, and notarizing for everyone who walks through the door.
+            {t.about.lede}
           </p>
         </div>
       </section>
@@ -48,28 +45,17 @@ function AboutPage() {
             className="w-full rounded-3xl object-cover shadow-[var(--shadow-card)] transition-transform duration-700 hover:scale-[1.02] animate-scale-in"
           />
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Our story</h2>
-            <p className="mt-4 text-muted-foreground">
-              We opened our doors to give the neighborhood a real alternative to the post
-              office — somewhere you could ship a package, print a flyer, fax a document, or
-              get something notarized without driving across town or waiting in a long line.
-            </p>
-            <p className="mt-3 text-muted-foreground">
-              Over the years, our customers have told us the same thing in dozens of reviews:
-              it's the people that make it. Josh, Troy, Bailey, Noah, Noel — the team takes
-              the time to help, jokes around, and treats every package like it's their own.
-            </p>
-            <p className="mt-3 text-muted-foreground">
-              Whether you're sending shoes across the country, mailing a chainsaw (yes,
-              really), or printing flyers for your business, we'll make it easy.
-            </p>
+            <h2 className="text-3xl font-bold tracking-tight">{t.about.storyTitle}</h2>
+            <p className="mt-4 text-muted-foreground">{t.about.story1}</p>
+            <p className="mt-3 text-muted-foreground">{t.about.story2}</p>
+            <p className="mt-3 text-muted-foreground">{t.about.story3}</p>
           </div>
         </div>
       </section>
 
       <section className="border-t border-border/60 bg-secondary/30 py-16">
         <div className="mx-auto max-w-7xl px-6">
-          <h2 className="text-3xl font-bold tracking-tight">What we stand for</h2>
+          <h2 className="text-3xl font-bold tracking-tight">{t.about.valuesTitle}</h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
               <div
@@ -92,24 +78,18 @@ function AboutPage() {
         <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2">
           <div className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
             <Users className="h-7 w-7 text-primary" />
-            <h3 className="mt-4 text-2xl font-bold">The team</h3>
-            <p className="mt-2 text-muted-foreground">
-              Friendly, knowledgeable, bilingual — and yes, a little funny. Stop in and you'll
-              probably leave on a first-name basis.
-            </p>
+            <h3 className="mt-4 text-2xl font-bold">{t.about.teamTitle}</h3>
+            <p className="mt-2 text-muted-foreground">{t.about.teamText}</p>
           </div>
           <div className="rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
             <MapPin className="h-7 w-7 text-primary" />
-            <h3 className="mt-4 text-2xl font-bold">Where to find us</h3>
-            <p className="mt-2 text-muted-foreground">
-              2728 Davie Blvd, Fort Lauderdale, FL 33312 — right in the heart of the
-              neighborhood, with easy parking out front.
-            </p>
+            <h3 className="mt-4 text-2xl font-bold">{t.about.whereTitle}</h3>
+            <p className="mt-2 text-muted-foreground">{t.about.whereText}</p>
             <Link
               to="/contact"
               className="mt-5 inline-flex rounded-lg bg-[image:var(--gradient-hero)] px-5 py-2.5 text-sm font-semibold text-primary-foreground"
             >
-              Get directions
+              {t.about.directions}
             </Link>
           </div>
         </div>
