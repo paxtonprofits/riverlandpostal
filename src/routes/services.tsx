@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import boxesImg from "@/assets/pack-and-ship.jpg";
 import printingImg from "@/assets/storefront.jpg";
+import { useLang } from "@/i18n/LanguageContext";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -18,66 +19,21 @@ export const Route = createFileRoute("/services")({
   component: ServicesPage,
 });
 
-const services = [
-  {
-    icon: Truck,
-    title: "Shipping — All Major Carriers",
-    text: "UPS, USPS, FedEx, and DHL all from one counter. We'll compare options and find you the most affordable rate for your package, every time.",
-  },
-  {
-    icon: Package,
-    title: "Custom Packing",
-    text: "Bring it as-is. We'll box, pad, and tape it up at the counter — fragile items, awkward shapes, even chainsaws. (Yes, really.)",
-  },
-  {
-    icon: Globe2,
-    title: "International Shipping",
-    text: "Envíos a Centro y Sur América, El Caribe y Europa. Door-to-door delivery and air or maritime options available.",
-  },
-  {
-    icon: Printer,
-    title: "Printing & Copies",
-    text: "Full-service color and B&W printing. Flyers, brochures, business cards, postcards, menus, stickers, banners, and more — for less.",
-  },
-  {
-    icon: ScrollText,
-    title: "Fax Services",
-    text: "Send and receive faxes quickly. Great for legal, medical, and tax documents when you need a paper trail.",
-  },
-  {
-    icon: FileSignature,
-    title: "Notary Public",
-    text: "On-site notary for documents, affidavits, and forms. Quick, professional, and trusted by local businesses.",
-  },
-  {
-    icon: Mail,
-    title: "Private Mailboxes",
-    text: "A real street address for your business or personal mail. Package acceptance from all carriers included.",
-  },
-  {
-    icon: Boxes,
-    title: "Office & Packing Supplies",
-    text: "Boxes, envelopes, tape, bubble wrap, mailers, labels — everything you need to ship, all in stock.",
-  },
-  {
-    icon: FileText,
-    title: "Scanning & Document Help",
-    text: "Scan to email, shred sensitive papers, or get help filling out forms. We're here to make it easy.",
-  },
-];
+const serviceIcons = [Truck, Package, Globe2, Printer, ScrollText, FileSignature, Mail, Boxes, FileText];
 
 function ServicesPage() {
+  const { t } = useLang();
+  const services = t.services.items.map((s, i) => ({ ...s, icon: serviceIcons[i] }));
   return (
     <>
       <section className="border-b border-border/60 bg-secondary/30 py-16">
         <div className="mx-auto max-w-7xl px-6 animate-fade-in-up">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">What we do</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary">{t.services.kicker}</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-            One counter. Every service you need.
+            {t.services.h1}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            From a single envelope to international freight, business cards to notarized
-            documents — we handle it all, quickly and with a smile.
+            {t.services.lede}
           </p>
         </div>
       </section>
@@ -114,12 +70,10 @@ function ServicesPage() {
           <div>
             <Stamp className="h-8 w-8 text-primary" />
             <h2 className="mt-3 text-3xl font-bold tracking-tight">
-              The friendly alternative to the post office.
+              {t.services.splitTitle}
             </h2>
             <p className="mt-3 text-muted-foreground">
-              No wandering between counters. No long waits. Just a small team that knows
-              shipping, knows the neighborhood, and will help you find the cheapest, fastest
-              way to get your package where it's going.
+              {t.services.splitText}
             </p>
           </div>
         </div>
@@ -130,18 +84,16 @@ function ServicesPage() {
           <div className="order-2 lg:order-1">
             <Printer className="h-8 w-8 text-primary" />
             <h2 className="mt-3 text-3xl font-bold tracking-tight">
-              Full-service printing for less.
+              {t.services.printTitle}
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Flyers, business cards, brochures, menus, postcards, stickers, vinyl, banners,
-              printed t-shirts, cups & tumblers, car wraps, channel letter signs — bring us
-              your idea, we'll print it.
+              {t.services.printText}
             </p>
             <Link
               to="/contact"
               className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)]"
             >
-              Get a quote <ArrowRight className="h-4 w-4" />
+              {t.services.quote} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <img
@@ -158,8 +110,8 @@ function ServicesPage() {
       <section className="border-t border-border/60 bg-[image:var(--gradient-hero)] py-14 text-primary-foreground">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
-            <h2 className="text-2xl font-bold">Not sure which service you need?</h2>
-            <p className="text-primary-foreground/80">Call us — we'll figure it out together.</p>
+            <h2 className="text-2xl font-bold">{t.services.ctaTitle}</h2>
+            <p className="text-primary-foreground/80">{t.services.ctaLede}</p>
           </div>
           <a
             href="tel:+19543331234"
