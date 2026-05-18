@@ -25,7 +25,7 @@ function AboutPage() {
   return (
     <>
       <section className="border-b border-border/60 bg-secondary/30 py-16">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 animate-fade-in-up">
           <p className="text-sm font-semibold uppercase tracking-wider text-primary">About us</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl">
             A small Fort Lauderdale shop with a big heart.
@@ -45,7 +45,7 @@ function AboutPage() {
             width={1600}
             height={1100}
             loading="lazy"
-            className="w-full rounded-3xl object-cover shadow-[var(--shadow-card)]"
+            className="w-full rounded-3xl object-cover shadow-[var(--shadow-card)] transition-transform duration-700 hover:scale-[1.02] animate-scale-in"
           />
           <div>
             <h2 className="text-3xl font-bold tracking-tight">Our story</h2>
@@ -71,12 +71,13 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl px-6">
           <h2 className="text-3xl font-bold tracking-tight">What we stand for</h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map((v) => (
+            {values.map((v, i) => (
               <div
                 key={v.title}
-                className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
+                style={{ animationDelay: `${i * 90}ms` }}
+                className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] hover-glow animate-fade-in-up"
               >
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-primary group-hover:text-primary-foreground">
                   <v.icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 font-semibold">{v.title}</h3>
