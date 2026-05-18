@@ -76,10 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Riverland Postal — Shipping, Printing & Notary in Fort Lauderdale" },
       { name: "description", content: "Friendly neighborhood pack & ship store on Davie Blvd. Shipping with all carriers, printing, faxing, notary, and bilingual service." },
-      { property: "og:title", content: "Riverland Postal" },
-      { property: "og:description", content: "Shipping, printing, notary and more — Fort Lauderdale." },
+      { property: "og:title", content: "Riverland Postal — Shipping, Printing & Notary in Fort Lauderdale" },
+      { property: "og:description", content: "Friendly neighborhood pack & ship store on Davie Blvd. Shipping with all carriers, printing, faxing, notary, and bilingual service." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Riverland Postal — Shipping, Printing & Notary in Fort Lauderdale" },
+      { name: "twitter:description", content: "Friendly neighborhood pack & ship store on Davie Blvd. Shipping with all carriers, printing, faxing, notary, and bilingual service." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/004bca66-2e63-4607-a67a-acfb68ddabc3/id-preview-eef1be6b--591707c5-c2df-4e6b-bce4-d61b1c889b91.lovable.app-1779144570379.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/004bca66-2e63-4607-a67a-acfb68ddabc3/id-preview-eef1be6b--591707c5-c2df-4e6b-bce4-d61b1c889b91.lovable.app-1779144570379.png" },
     ],
     links: [
       {
