@@ -3,7 +3,7 @@ import {
   Truck, Package, Printer, FileSignature, Mail, Globe2,
   Stamp, FileText, Boxes, ScrollText, Phone, ArrowRight,
 } from "lucide-react";
-import boxesImg from "@/assets/store-interior.jpg";
+import boxesImg from "@/assets/pack-and-ship.jpg";
 import printingImg from "@/assets/storefront.jpg";
 
 export const Route = createFileRoute("/services")({
@@ -70,7 +70,7 @@ function ServicesPage() {
   return (
     <>
       <section className="border-b border-border/60 bg-secondary/30 py-16">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 animate-fade-in-up">
           <p className="text-sm font-semibold uppercase tracking-wider text-primary">What we do</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
             One counter. Every service you need.
@@ -84,12 +84,13 @@ function ServicesPage() {
 
       <section className="py-16">
         <div className="mx-auto grid max-w-7xl gap-5 px-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s) => (
+          {services.map((s, i) => (
             <div
               key={s.title}
-              className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-transform hover:-translate-y-1"
+              style={{ animationDelay: `${i * 70}ms` }}
+              className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] hover-glow animate-fade-in-up"
             >
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                 <s.icon className="h-5 w-5" />
               </span>
               <h2 className="mt-4 text-lg font-semibold">{s.title}</h2>
@@ -104,11 +105,11 @@ function ServicesPage() {
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
           <img
             src={boxesImg}
-            alt="Packing supplies and boxes on the counter"
+            alt="Riverland Postal storefront — Pack and Ship"
             width={1200}
             height={900}
             loading="lazy"
-            className="w-full rounded-3xl object-cover shadow-[var(--shadow-card)]"
+            className="w-full rounded-3xl object-cover shadow-[var(--shadow-card)] transition-transform duration-500 hover:scale-[1.02] animate-scale-in"
           />
           <div>
             <Stamp className="h-8 w-8 text-primary" />
