@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useLang } from "@/i18n/LanguageContext";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -14,17 +15,17 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const { t } = useLang();
   return (
     <>
       <section className="border-b border-border/60 bg-secondary/30 py-16">
         <div className="mx-auto max-w-7xl px-6 animate-fade-in-up">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">Get in touch</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-primary">{t.contact.kicker}</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-            Stop by, call, or send us a note.
+            {t.contact.h1}
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-            We're right on Davie Blvd with easy parking. Walk in any time during open hours —
-            no appointment needed.
+            {t.contact.lede}
           </p>
         </div>
       </section>
@@ -32,27 +33,23 @@ function ContactPage() {
       <section className="py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2">
           <div className="space-y-5">
-            <InfoCard icon={MapPin} title="Address" lines={["2728 Davie Blvd", "Fort Lauderdale, FL 33312"]} />
+            <InfoCard icon={MapPin} title={t.contact.address} lines={["2728 Davie Blvd", "Fort Lauderdale, FL 33312"]} />
             <InfoCard
               icon={Phone}
-              title="Phone"
+              title={t.contact.phone}
               lines={["(954) 333-1234"]}
               href="tel:+19543331234"
             />
             <InfoCard
               icon={Mail}
-              title="Email"
+              title={t.contact.email}
               lines={["hello@riverlandpostal.com"]}
               href="mailto:hello@riverlandpostal.com"
             />
             <InfoCard
               icon={Clock}
-              title="Hours"
-              lines={[
-                "Monday – Friday · 9:30 AM – 7:00 PM",
-                "Saturday · 10:00 AM – 6:00 PM",
-                "Sunday · Closed",
-              ]}
+              title={t.contact.hours}
+              lines={t.contact.hoursLines}
             />
           </div>
 
@@ -72,10 +69,8 @@ function ContactPage() {
 
       <section className="border-t border-border/60 bg-secondary/30 py-16">
         <div className="mx-auto max-w-3xl px-6">
-          <h2 className="text-2xl font-bold">Send us a message</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Have a printing question or a custom shipping need? Drop us a line.
-          </p>
+          <h2 className="text-2xl font-bold">{t.contact.formTitle}</h2>
+          <p className="mt-2 text-sm text-muted-foreground">{t.contact.formLede}</p>
           <form
             className="mt-8 grid gap-4"
             onSubmit={(e) => {
@@ -88,11 +83,11 @@ function ContactPage() {
             }}
           >
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field name="name" label="Your name" required />
-              <Field name="email" label="Email" type="email" required />
+              <Field name="name" label={t.contact.name} required />
+              <Field name="email" label={t.contact.emailLabel} type="email" required />
             </div>
             <div className="grid gap-2">
-              <label htmlFor="message" className="text-sm font-medium">How can we help?</label>
+              <label htmlFor="message" className="text-sm font-medium">{t.contact.message}</label>
               <textarea
                 id="message"
                 name="message"
@@ -105,7 +100,7 @@ function ContactPage() {
               type="submit"
               className="justify-self-start rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5"
             >
-              Send message
+              {t.contact.send}
             </button>
           </form>
         </div>
