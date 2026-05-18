@@ -17,7 +17,7 @@ function ContactPage() {
   return (
     <>
       <section className="border-b border-border/60 bg-secondary/30 py-16">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 animate-fade-in-up">
           <p className="text-sm font-semibold uppercase tracking-wider text-primary">Get in touch</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
             Stop by, call, or send us a note.
@@ -120,8 +120,8 @@ function InfoCard({
   icon: typeof MapPin; title: string; lines: string[]; href?: string;
 }) {
   const inner = (
-    <div className="flex gap-4 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-colors hover:bg-secondary/40">
-      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+    <div className="group flex gap-4 rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[var(--shadow-soft)]">
+      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-primary group-hover:text-primary-foreground">
         <Icon className="h-5 w-5" />
       </span>
       <div>
