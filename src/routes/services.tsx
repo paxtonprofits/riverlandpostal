@@ -3,8 +3,8 @@ import {
   Truck, Package, Printer, FileSignature, Mail, Globe2,
   Stamp, FileText, Boxes, ScrollText, Phone, ArrowRight,
 } from "lucide-react";
-import boxesImg from "@/assets/boxes.jpg";
-import printingImg from "@/assets/printing.jpg";
+import boxesImg from "@/assets/store-interior.jpg";
+import printingImg from "@/assets/storefront.jpg";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
