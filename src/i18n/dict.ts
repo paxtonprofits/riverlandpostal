@@ -112,7 +112,7 @@ const en = {
     message: "How can we help?",
     send: "Send message",
   },
-} as const;
+};
 
 const es: typeof en = {
   nav: { home: "Inicio", services: "Servicios", about: "Nosotros", reviews: "Reseñas", contact: "Contacto" },
