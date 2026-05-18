@@ -1,15 +1,17 @@
 import { Link, Outlet } from "@tanstack/react-router";
-import { Package, Phone, MapPin, Mail } from "lucide-react";
-
-const nav = [
-  { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
-  { to: "/about", label: "About" },
-  { to: "/reviews", label: "Reviews" },
-  { to: "/contact", label: "Contact" },
-] as const;
+import { Package, Phone, MapPin, Mail, Languages } from "lucide-react";
+import { useLang } from "@/i18n/LanguageContext";
 
 export function SiteLayout() {
+  const { t, toggle, lang } = useLang();
+  const nav = [
+    { to: "/", label: t.nav.home },
+    { to: "/services", label: t.nav.services },
+    { to: "/about", label: t.nav.about },
+    { to: "/reviews", label: t.nav.reviews },
+    { to: "/contact", label: t.nav.contact },
+  ] as const;
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
@@ -33,12 +35,24 @@ export function SiteLayout() {
               </Link>
             ))}
           </nav>
-          <a
-            href="tel:+19543331234"
-            className="group hidden items-center gap-2 rounded-md bg-[image:var(--gradient-hero)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 sm:inline-flex"
-          >
-            <Phone className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" /> Call Store
-          </a>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={toggle}
+              aria-label={t.cta.switchLabel}
+              className="group inline-flex items-center gap-1.5 rounded-md border border-border bg-background px-3 py-2 text-sm font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary"
+            >
+              <Languages className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+              <span aria-hidden>{lang === "en" ? "ES" : "EN"}</span>
+              <span className="hidden sm:inline">· {t.cta.switchTo}</span>
+            </button>
+            <a
+              href="tel:+19543331234"
+              className="group hidden items-center gap-2 rounded-md bg-[image:var(--gradient-hero)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 sm:inline-flex"
+            >
+              <Phone className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" /> {t.cta.call}
+            </a>
+          </div>
         </div>
         <nav className="flex items-center justify-center gap-1 border-t border-border/60 px-4 py-2 md:hidden">
           {nav.map((n) => (
@@ -69,11 +83,11 @@ export function SiteLayout() {
               Riverland Postal
             </div>
             <p className="mt-3 text-sm text-muted-foreground">
-              Your friendly neighborhood pack &amp; ship store on Davie Blvd. Hablamos Español.
+              {t.footer.tagline}
             </p>
           </div>
           <div className="text-sm">
-            <h4 className="mb-3 font-semibold">Visit Us</h4>
+            <h4 className="mb-3 font-semibold">{t.footer.visit}</h4>
             <p className="flex items-start gap-2 text-muted-foreground">
               <MapPin className="mt-0.5 h-4 w-4 text-primary" />
               2728 Davie Blvd<br />Fort Lauderdale, FL 33312
@@ -87,16 +101,16 @@ export function SiteLayout() {
             </p>
           </div>
           <div className="text-sm">
-            <h4 className="mb-3 font-semibold">Hours</h4>
+            <h4 className="mb-3 font-semibold">{t.footer.hours}</h4>
             <ul className="space-y-1 text-muted-foreground">
-              <li>Mon–Fri · 9:30 AM – 7:00 PM</li>
-              <li>Saturday · 10:00 AM – 6:00 PM</li>
-              <li>Sunday · Closed</li>
+              <li>{t.footer.mon}</li>
+              <li>{t.footer.sat}</li>
+              <li>{t.footer.sun}</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Riverland Postal. All rights reserved.
+          © {new Date().getFullYear()} Riverland Postal. {t.footer.rights}
         </div>
       </footer>
     </div>
