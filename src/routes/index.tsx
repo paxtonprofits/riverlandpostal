@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Package, Printer, FileSignature, Truck, Clock, Heart, Globe2, Star, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/store-interior.jpg";
+import { useLang } from "@/i18n/LanguageContext";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,21 +15,13 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const highlights = [
-  { icon: Truck, title: "All Carriers", text: "UPS, USPS, FedEx, DHL — one stop." },
-  { icon: Clock, title: "No Long Lines", text: "Quick in-and-out service." },
-  { icon: Heart, title: "We Go The Extra Mile", text: "Friendly staff who actually help." },
-  { icon: Globe2, title: "Bilingual", text: "English & Español, siempre." },
-];
-
-const services = [
-  { icon: Truck, title: "Shipping", text: "Compare carriers and find the most affordable option for your package." },
-  { icon: Package, title: "Packing", text: "Bring it as-is — we'll box it, pad it, and tape it up at the counter." },
-  { icon: Printer, title: "Printing & Copies", text: "Flyers, business cards, brochures, color copies, full-service print." },
-  { icon: FileSignature, title: "Notary & Fax", text: "Notarize documents and send faxes without leaving the store." },
-];
+const highlightIcons = [Truck, Clock, Heart, Globe2];
+const serviceIcons = [Truck, Package, Printer, FileSignature];
 
 function Index() {
+  const { t } = useLang();
+  const highlights = t.home.highlights.map((h, i) => ({ ...h, icon: highlightIcons[i] }));
+  const services = t.home.services.map((s, i) => ({ ...s, icon: serviceIcons[i] }));
   return (
     <>
       {/* Hero */}
@@ -38,32 +31,31 @@ function Index() {
           <div>
           <div className="animate-fade-in-up">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary animate-pulse-glow">
-              <Star className="h-3 w-3 fill-current" /> 5.0 · 84 Google reviews
+              <Star className="h-3 w-3 fill-current" /> {t.home.badge}
             </span>
             <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              Your friendly{" "}
+              {t.home.h1a}{" "}
               <span className="bg-[image:var(--gradient-hero)] bg-clip-text text-transparent">
-                pack &amp; ship
+                {t.home.h1b}
               </span>{" "}
-              shop on Davie Blvd.
+              {t.home.h1c}
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-              Shipping, printing, faxing, notary, and packaging — done quickly by people who
-              actually want to help. No long lines. Bilingual staff. We've got you.
+              {t.home.lede}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/services"
                 className="group inline-flex items-center gap-2 rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110"
               >
-                See our services
+                {t.home.seeServices}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary hover:border-primary/40"
               >
-                Visit the store
+                {t.home.visitStore}
               </Link>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
@@ -100,17 +92,17 @@ function Index() {
           <div className="flex items-end justify-between gap-6">
             <div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Everything you came for — and a smile.
+                {t.home.servicesTitle}
               </h2>
               <p className="mt-3 max-w-2xl text-muted-foreground">
-                A real local alternative to the post office. One counter, every service.
+                {t.home.servicesLede}
               </p>
             </div>
             <Link
               to="/services"
               className="hidden text-sm font-semibold text-primary hover:underline sm:inline"
             >
-              All services →
+              {t.home.allServices}
             </Link>
           </div>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -140,15 +132,14 @@ function Index() {
             ))}
           </div>
           <blockquote className="mt-5 text-2xl font-medium leading-snug sm:text-3xl">
-            “Troy was amazing… he was very patient with me as I suffer from severe anxiety, and
-            he also made me laugh.”
+            {t.home.quote}
           </blockquote>
-          <p className="mt-4 text-sm text-muted-foreground">— Mary Ellen Roman, Google review</p>
+          <p className="mt-4 text-sm text-muted-foreground">{t.home.quoteBy}</p>
           <Link
             to="/reviews"
             className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary story-link"
           >
-            Read all 84 reviews
+            {t.home.readAll}
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
@@ -158,16 +149,16 @@ function Index() {
       <section className="border-t border-border/60 bg-[image:var(--gradient-hero)] py-16 text-primary-foreground">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
-            <h2 className="text-2xl font-bold sm:text-3xl">Stop by and say hi.</h2>
+            <h2 className="text-2xl font-bold sm:text-3xl">{t.home.ctaTitle}</h2>
             <p className="mt-1 text-primary-foreground/80">
-              2728 Davie Blvd, Fort Lauderdale · Open today
+              {t.home.ctaLede}
             </p>
           </div>
           <Link
             to="/contact"
             className="rounded-lg bg-background px-6 py-3 font-semibold text-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:scale-105"
           >
-            Get directions
+            {t.home.directions}
           </Link>
         </div>
       </section>
