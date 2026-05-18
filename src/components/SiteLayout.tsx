@@ -82,7 +82,8 @@ export function SiteLayout() {
               <Phone className="h-4 w-4 text-primary" /> (954) 333-1234
             </p>
             <p className="mt-2 flex items-center gap-2 text-muted-foreground">
-              <Mail className="h-4 w-4 text-primary" /> hello@riverlandpostal.com
+              <Mail className="h-4 w-4 text-primary" />
+              <span>hello@riverlandpostal.com</span>
             </p>
           </div>
           <div className="text-sm">
