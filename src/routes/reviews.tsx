@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Star, Quote } from "lucide-react";
+import { useLang } from "@/i18n/LanguageContext";
 
 export const Route = createFileRoute("/reviews")({
   head: () => ({
@@ -33,6 +34,7 @@ const reviews = [
 ];
 
 function ReviewsPage() {
+  const { t } = useLang();
   return (
     <>
       <section className="border-b border-border/60 bg-secondary/30 py-16">
@@ -44,13 +46,13 @@ function ReviewsPage() {
               ))}
             </span>
             <span className="font-semibold">5.0</span>
-            <span className="text-muted-foreground">· 84 Google reviews</span>
+            <span className="text-muted-foreground">· {t.reviews.badge}</span>
           </div>
           <h1 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
-            What our neighbors are saying.
+            {t.reviews.h1}
           </h1>
           <p className="mt-4 text-lg text-muted-foreground">
-            Real reviews from real customers. We're proud of every one.
+            {t.reviews.lede}
           </p>
         </div>
       </section>
@@ -82,17 +84,15 @@ function ReviewsPage() {
 
       <section className="border-t border-border/60 bg-[image:var(--gradient-hero)] py-14 text-primary-foreground">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2 className="text-3xl font-bold">Loved your visit?</h2>
-          <p className="mt-2 text-primary-foreground/80">
-            Leaving a quick Google review helps our small business more than you know.
-          </p>
+          <h2 className="text-3xl font-bold">{t.reviews.ctaTitle}</h2>
+          <p className="mt-2 text-primary-foreground/80">{t.reviews.ctaLede}</p>
           <a
             href="https://www.google.com/search?q=Riverland+Postal+Fort+Lauderdale"
             target="_blank"
             rel="noreferrer"
             className="mt-6 inline-flex rounded-lg bg-background px-6 py-3 font-semibold text-foreground shadow-[var(--shadow-soft)]"
           >
-            Leave a review on Google
+            {t.reviews.ctaBtn}
           </a>
         </div>
       </section>
