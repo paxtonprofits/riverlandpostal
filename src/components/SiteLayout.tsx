@@ -14,11 +14,11 @@ export function SiteLayout() {
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
-          <Link to="/" className="flex items-center gap-2 font-bold text-lg">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[image:var(--gradient-hero)] text-primary-foreground shadow-[var(--shadow-soft)]">
+          <Link to="/" className="group flex items-center gap-2 font-bold text-lg">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[image:var(--gradient-hero)] text-primary-foreground shadow-[var(--shadow-soft)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
               <Package className="h-5 w-5" />
             </span>
-            <span className="tracking-tight">Riverland Postal</span>
+            <span className="tracking-tight transition-colors group-hover:text-primary">Riverland Postal</span>
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {nav.map((n) => (
@@ -35,9 +35,9 @@ export function SiteLayout() {
           </nav>
           <a
             href="tel:+19543331234"
-            className="hidden items-center gap-2 rounded-md bg-[image:var(--gradient-hero)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5 sm:inline-flex"
+            className="group hidden items-center gap-2 rounded-md bg-[image:var(--gradient-hero)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 sm:inline-flex"
           >
-            <Phone className="h-4 w-4" /> Call Store
+            <Phone className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" /> Call Store
           </a>
         </div>
         <nav className="flex items-center justify-center gap-1 border-t border-border/60 px-4 py-2 md:hidden">

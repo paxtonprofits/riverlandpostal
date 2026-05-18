@@ -36,7 +36,8 @@ function Index() {
         <div className="absolute inset-0 bg-[image:var(--gradient-hero)] opacity-[0.04]" />
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
+          <div className="animate-fade-in-up">
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary animate-pulse-glow">
               <Star className="h-3 w-3 fill-current" /> 5.0 · 84 Google reviews
             </span>
             <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
@@ -53,35 +54,41 @@ function Index() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/services"
-                className="inline-flex items-center gap-2 rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2 rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110"
               >
-                See our services <ArrowRight className="h-4 w-4" />
+                See our services
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 font-semibold text-foreground transition-colors hover:bg-secondary"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary hover:border-primary/40"
               >
                 Visit the store
               </Link>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
-              {highlights.map((h) => (
-                <div key={h.title} className="flex flex-col gap-1">
-                  <h.icon className="h-5 w-5 text-primary" />
+              {highlights.map((h, i) => (
+                <div
+                  key={h.title}
+                  style={{ animationDelay: `${300 + i * 100}ms` }}
+                  className="group flex flex-col gap-1 animate-fade-in-up cursor-default"
+                >
+                  <h.icon className="h-5 w-5 text-primary transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
                   <p className="font-semibold">{h.title}</p>
                   <p className="text-xs text-muted-foreground">{h.text}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute -inset-6 rounded-3xl bg-[image:var(--gradient-hero)] opacity-20 blur-2xl" />
+          </div>
+          <div className="relative animate-scale-in">
+            <div className="absolute -inset-6 rounded-3xl bg-[image:var(--gradient-hero)] opacity-20 blur-2xl animate-float-slow" />
             <img
               src={heroImg}
               alt="Friendly staff helping a customer at Riverland Postal counter"
               width={1600}
               height={1100}
-              className="relative w-full rounded-3xl object-cover shadow-[var(--shadow-card)]"
+              className="relative w-full rounded-3xl object-cover shadow-[var(--shadow-card)] transition-transform duration-700 hover:scale-[1.02]"
             />
           </div>
         </div>
@@ -107,12 +114,13 @@ function Index() {
             </Link>
           </div>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((s) => (
+            {services.map((s, i) => (
               <div
                 key={s.title}
-                className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] transition-transform hover:-translate-y-1"
+                style={{ animationDelay: `${i * 90}ms` }}
+                className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] hover-glow animate-fade-in-up"
               >
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-primary group-hover:text-primary-foreground">
                   <s.icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 font-semibold">{s.title}</h3>
@@ -138,9 +146,10 @@ function Index() {
           <p className="mt-4 text-sm text-muted-foreground">— Mary Ellen Roman, Google review</p>
           <Link
             to="/reviews"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+            className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary story-link"
           >
-            Read all 84 reviews <ArrowRight className="h-4 w-4" />
+            Read all 84 reviews
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </div>
       </section>
@@ -156,7 +165,7 @@ function Index() {
           </div>
           <Link
             to="/contact"
-            className="rounded-lg bg-background px-6 py-3 font-semibold text-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5"
+            className="rounded-lg bg-background px-6 py-3 font-semibold text-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:scale-105"
           >
             Get directions
           </Link>

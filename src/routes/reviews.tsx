@@ -36,7 +36,7 @@ function ReviewsPage() {
   return (
     <>
       <section className="border-b border-border/60 bg-secondary/30 py-16">
-        <div className="mx-auto max-w-7xl px-6 text-center">
+        <div className="mx-auto max-w-7xl px-6 text-center animate-fade-in-up">
           <div className="inline-flex items-center gap-3 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm">
             <span className="flex gap-0.5 text-accent">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -58,12 +58,13 @@ function ReviewsPage() {
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-6">
           <div className="columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5 [&>*]:break-inside-avoid">
-            {reviews.map((r) => (
+            {reviews.map((r, i) => (
               <article
                 key={r.name}
-                className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)]"
+                style={{ animationDelay: `${(i % 6) * 80}ms` }}
+                className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] hover-lift animate-fade-in-up"
               >
-                <Quote className="h-6 w-6 text-primary/40" />
+                <Quote className="h-6 w-6 text-primary/40 transition-all duration-300 group-hover:text-primary group-hover:scale-110" />
                 <p className="mt-3 text-sm leading-relaxed text-foreground">“{r.text}”</p>
                 <div className="mt-4 flex items-center justify-between border-t border-border/60 pt-3">
                   <span className="text-sm font-semibold">{r.name}</span>
