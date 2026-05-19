@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState, type ReactNode, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type ReactNode, type CSSProperties, type ElementType } from "react";
 
 type Props = {
   children: ReactNode;
   className?: string;
   delay?: number;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
   style?: CSSProperties;
 };
 
