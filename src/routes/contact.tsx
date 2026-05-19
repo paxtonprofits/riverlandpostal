@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
+import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -32,7 +33,7 @@ function ContactPage() {
 
       <section className="py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2">
-          <div className="space-y-5">
+          <Reveal className="space-y-5">
             <InfoCard icon={MapPin} title={t.contact.address} lines={["2728 Davie Blvd", "Fort Lauderdale, FL 33312"]} />
             <InfoCard
               icon={Phone}
@@ -51,24 +52,24 @@ function ContactPage() {
               title={t.contact.hours}
               lines={t.contact.hoursLines}
             />
-          </div>
+          </Reveal>
 
-          <div className="overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)]">
+          <Reveal delay={150} className="group overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:border-primary/40">
             <iframe
               title="Riverland Postal map"
               src="https://www.google.com/maps?q=2728+Davie+Blvd,+Fort+Lauderdale,+FL+33312&output=embed"
               width="100%"
               height="100%"
               loading="lazy"
-              className="min-h-[420px] w-full border-0"
+              className="min-h-[420px] w-full border-0 transition-transform duration-700 group-hover:scale-[1.02]"
               referrerPolicy="no-referrer-when-downgrade"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="border-t border-border/60 bg-secondary/30 py-16">
-        <div className="mx-auto max-w-3xl px-6">
+        <Reveal className="mx-auto max-w-3xl px-6">
           <h2 className="text-2xl font-bold">{t.contact.formTitle}</h2>
           <p className="mt-2 text-sm text-muted-foreground">{t.contact.formLede}</p>
           <form
@@ -98,12 +99,12 @@ function ContactPage() {
             </div>
             <button
               type="submit"
-              className="justify-self-start rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-transform hover:-translate-y-0.5"
+              className="group relative justify-self-start overflow-hidden rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover-shine hover:-translate-y-1 hover:scale-105 hover:shadow-lg"
             >
               {t.contact.send}
             </button>
           </form>
-        </div>
+        </Reveal>
       </section>
     </>
   );
