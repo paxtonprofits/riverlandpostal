@@ -1,5 +1,5 @@
 import { Link, Outlet } from "@tanstack/react-router";
-import { Package, Phone, MapPin, Mail, Languages } from "lucide-react";
+import { Phone, MapPin, Mail, Languages } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
 
 export function SiteLayout() {
@@ -16,11 +16,8 @@ export function SiteLayout() {
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
-          <Link to="/" className="group flex items-center gap-2 font-bold text-lg">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[image:var(--gradient-hero)] text-primary-foreground shadow-[var(--shadow-soft)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-              <Package className="h-5 w-5" />
-            </span>
-            <span className="tracking-tight transition-colors group-hover:text-primary">Riverland Postal</span>
+          <Link to="/" className="group flex items-center gap-2">
+            <img src="/logo.png" alt="Pack & Print Multiservice LLC" className="h-12 w-auto transition-transform duration-300 group-hover:scale-105" />
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {nav.map((n) => (
@@ -76,11 +73,8 @@ export function SiteLayout() {
       <footer className="border-t border-border/60 bg-secondary/40">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 py-12 md:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2 font-bold">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[image:var(--gradient-hero)] text-primary-foreground">
-                <Package className="h-4 w-4" />
-              </span>
-              Riverland Postal
+            <div className="flex items-center gap-2">
+              <img src="/logo.png" alt="Pack & Print Multiservice LLC" className="h-10 w-auto" />
             </div>
             <p className="mt-3 text-sm text-muted-foreground">
               {t.footer.tagline}
