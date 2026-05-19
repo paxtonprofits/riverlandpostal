@@ -27,7 +27,7 @@ export function SiteLayout() {
               <Link
                 key={n.to}
                 to={n.to}
-                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              className="relative rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary hover:text-foreground hover-underline-grow"
                 activeProps={{ className: "bg-secondary text-foreground" }}
                 activeOptions={{ exact: n.to === "/" }}
               >
@@ -48,7 +48,7 @@ export function SiteLayout() {
             </button>
             <a
               href="tel:+19543331234"
-              className="group hidden items-center gap-2 rounded-md bg-[image:var(--gradient-hero)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 sm:inline-flex"
+              className="group relative hidden items-center gap-2 overflow-hidden rounded-md bg-[image:var(--gradient-hero)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover-shine hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 sm:inline-flex"
             >
               <Phone className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" /> {t.cta.call}
             </a>
