@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Package, Printer, FileSignature, Truck, Clock, Heart, Globe2, Star, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/store-interior.jpg";
 import { useLang } from "@/i18n/LanguageContext";
+import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,16 +27,18 @@ function Index() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[image:var(--gradient-hero)] opacity-[0.04]" />
+        <div className="absolute inset-0 bg-[image:var(--gradient-hero)] opacity-[0.04] animate-gradient-x" />
+        <div className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 bg-primary/20 blur-3xl animate-blob" />
+        <div className="pointer-events-none absolute -right-24 top-40 h-72 w-72 bg-accent/20 blur-3xl animate-blob" style={{ animationDelay: "3s" }} />
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
-          <div>
+          <div className="animate-slide-in-left">
           <div className="animate-fade-in-up">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary animate-pulse-glow">
-              <Star className="h-3 w-3 fill-current" /> {t.home.badge}
+              <Star className="h-3 w-3 fill-current animate-bounce-soft" /> {t.home.badge}
             </span>
             <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               {t.home.h1a}{" "}
-              <span className="bg-[image:var(--gradient-hero)] bg-clip-text text-transparent">
+              <span className="bg-[image:var(--gradient-hero)] bg-clip-text text-transparent animate-gradient-x">
                 {t.home.h1b}
               </span>{" "}
               {t.home.h1c}
@@ -46,14 +49,14 @@ function Index() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/services"
-                className="group inline-flex items-center gap-2 rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-lg bg-[image:var(--gradient-hero)] px-6 py-3 font-semibold text-primary-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover-shine hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110"
               >
                 {t.home.seeServices}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary hover:border-primary/40"
+                className="group inline-flex items-center gap-2 rounded-lg border border-border bg-background px-6 py-3 font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary hover:border-primary/40 hover:scale-[1.03]"
               >
                 {t.home.visitStore}
               </Link>
@@ -73,14 +76,14 @@ function Index() {
             </div>
           </div>
           </div>
-          <div className="relative animate-scale-in">
-            <div className="absolute -inset-6 rounded-3xl bg-[image:var(--gradient-hero)] opacity-20 blur-2xl animate-float-slow" />
+          <div className="relative animate-slide-in-right">
+            <div className="absolute -inset-6 rounded-3xl bg-[image:var(--gradient-hero)] opacity-30 blur-2xl animate-float-slow" />
             <img
               src={heroImg}
               alt="Friendly staff helping a customer at Riverland Postal counter"
               width={1600}
               height={1100}
-              className="relative w-full rounded-3xl object-cover shadow-[var(--shadow-card)] transition-transform duration-700 hover:scale-[1.02]"
+              className="relative w-full rounded-3xl object-cover shadow-[var(--shadow-card)] transition-all duration-700 hover:scale-[1.03] hover:-rotate-1 hover:shadow-2xl"
             />
           </div>
         </div>
@@ -89,7 +92,7 @@ function Index() {
       {/* Services */}
       <section className="border-t border-border/60 bg-secondary/30 py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="flex items-end justify-between gap-6">
+          <Reveal className="flex items-end justify-between gap-6">
             <div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
                 {t.home.servicesTitle}
@@ -100,24 +103,25 @@ function Index() {
             </div>
             <Link
               to="/services"
-              className="hidden text-sm font-semibold text-primary hover:underline sm:inline"
+              className="group hidden items-center gap-1 text-sm font-semibold text-primary sm:inline-flex hover-underline-grow"
             >
               {t.home.allServices}
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
-          </div>
+          </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((s, i) => (
-              <div
+              <Reveal
                 key={s.title}
-                style={{ animationDelay: `${i * 90}ms` }}
-                className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] hover-glow animate-fade-in-up"
+                delay={i * 90}
+                className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] hover-tilt hover-shine"
               >
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-primary group-hover:text-primary-foreground">
                   <s.icon className="h-5 w-5" />
                 </span>
                 <h3 className="mt-4 font-semibold">{s.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{s.text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -125,10 +129,10 @@ function Index() {
 
       {/* Testimonial strip */}
       <section className="py-20">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+        <Reveal className="mx-auto max-w-4xl px-6 text-center">
           <div className="flex justify-center gap-1 text-accent">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-5 w-5 fill-current" />
+              <Star key={i} className="h-5 w-5 fill-current transition-transform duration-300 hover:scale-125 hover:rotate-12" style={{ transitionDelay: `${i * 40}ms` }} />
             ))}
           </div>
           <blockquote className="mt-5 text-2xl font-medium leading-snug sm:text-3xl">
@@ -142,11 +146,12 @@ function Index() {
             {t.home.readAll}
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
-        </div>
+        </Reveal>
       </section>
 
       {/* CTA */}
-      <section className="border-t border-border/60 bg-[image:var(--gradient-hero)] py-16 text-primary-foreground">
+      <section className="relative overflow-hidden border-t border-border/60 bg-[image:var(--gradient-hero)] py-16 text-primary-foreground animate-gradient-x">
+        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl animate-blob" />
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-6 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
             <h2 className="text-2xl font-bold sm:text-3xl">{t.home.ctaTitle}</h2>
@@ -156,7 +161,7 @@ function Index() {
           </div>
           <Link
             to="/contact"
-            className="rounded-lg bg-background px-6 py-3 font-semibold text-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:scale-105"
+            className="group relative overflow-hidden rounded-lg bg-background px-6 py-3 font-semibold text-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover-shine hover:-translate-y-1 hover:scale-105"
           >
             {t.home.directions}
           </Link>
