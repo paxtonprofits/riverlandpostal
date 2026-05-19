@@ -177,6 +177,43 @@
   0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 35%, transparent); }
   50%      { box-shadow: 0 0 0 12px color-mix(in oklab, var(--primary) 0%, transparent); }
 }
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+}
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes shine {
+  0% { transform: translateX(-120%) skewX(-20deg); }
+  100% { transform: translateX(220%) skewX(-20deg); }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes blob {
+  0%, 100% { border-radius: 42% 58% 63% 37% / 49% 36% 64% 51%; transform: translate(0,0) scale(1); }
+  33% { border-radius: 67% 33% 40% 60% / 36% 56% 44% 64%; transform: translate(20px,-15px) scale(1.05); }
+  66% { border-radius: 38% 62% 56% 44% / 60% 40% 60% 40%; transform: translate(-15px,12px) scale(0.97); }
+}
 
 @utility animate-fade-in-up {
   animation: fade-in-up 0.7s ease-out both;
@@ -193,11 +230,37 @@
 @utility animate-pulse-glow {
   animation: pulse-glow 2.4s ease-out infinite;
 }
+@utility animate-slide-in-left {
+  animation: slide-in-left 0.7s ease-out both;
+}
+@utility animate-slide-in-right {
+  animation: slide-in-right 0.7s ease-out both;
+}
+@utility animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 6s ease infinite;
+}
+@utility animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+@utility animate-wiggle {
+  animation: wiggle 0.6s ease-in-out;
+}
+@utility animate-bounce-soft {
+  animation: bounce-soft 2s ease-in-out infinite;
+}
+@utility animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+@utility animate-blob {
+  animation: blob 14s ease-in-out infinite;
+}
 
 @utility delay-100 { animation-delay: 100ms; }
 @utility delay-200 { animation-delay: 200ms; }
 @utility delay-300 { animation-delay: 300ms; }
 @utility delay-500 { animation-delay: 500ms; }
+@utility delay-700 { animation-delay: 700ms; }
 
 @utility hover-lift {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -213,6 +276,54 @@
     transform: translateY(-2px);
     box-shadow: 0 0 0 4px color-mix(in oklab, var(--primary) 12%, transparent), var(--shadow-soft);
   }
+}
+
+@utility hover-tilt {
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  &:hover {
+    transform: perspective(900px) rotateX(3deg) rotateY(-3deg) translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+@utility hover-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, color-mix(in oklab, white 35%, transparent), transparent);
+    transform: translateX(-120%) skewX(-20deg);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+  }
+  &:hover::before {
+    transform: translateX(220%) skewX(-20deg);
+  }
+}
+
+@utility hover-pop {
+  transition: transform 0.25s cubic-bezier(.2,.8,.2,1);
+  &:hover { transform: scale(1.06); }
+  &:active { transform: scale(0.98); }
+}
+
+@utility hover-underline-grow {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    height: 2px;
+    width: 0;
+    background: currentColor;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  &:hover::after { width: 100%; left: 0; }
 }
 
 @utility story-link {
@@ -234,6 +345,18 @@
     transform: scaleX(1);
     transform-origin: left;
   }
+}
+
+/* Scroll reveal — applied by <Reveal /> when entering viewport */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
+.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
