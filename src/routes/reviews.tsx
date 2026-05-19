@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Star, Quote } from "lucide-react";
 import { useLang } from "@/i18n/LanguageContext";
+import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/reviews")({
   head: () => ({
@@ -61,28 +62,30 @@ function ReviewsPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="columns-1 gap-5 sm:columns-2 lg:columns-3 [&>*]:mb-5 [&>*]:break-inside-avoid">
             {reviews.map((r, i) => (
-              <article
+              <Reveal
+                as="article"
                 key={r.name}
-                style={{ animationDelay: `${(i % 6) * 80}ms` }}
-                className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] hover-lift animate-fade-in-up"
+                delay={(i % 6) * 80}
+                className="group rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-card)] hover-tilt hover-shine"
               >
-                <Quote className="h-6 w-6 text-primary/40 transition-all duration-300 group-hover:text-primary group-hover:scale-110" />
+                <Quote className="h-6 w-6 text-primary/40 transition-all duration-300 group-hover:text-primary group-hover:scale-125 group-hover:-rotate-6" />
                 <p className="mt-3 text-sm leading-relaxed text-foreground">“{r.text}”</p>
                 <div className="mt-4 flex items-center justify-between border-t border-border/60 pt-3">
                   <span className="text-sm font-semibold">{r.name}</span>
                   <span className="flex gap-0.5 text-accent">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                      <Star key={i} className="h-3.5 w-3.5 fill-current transition-transform duration-300 group-hover:scale-125" style={{ transitionDelay: `${i * 30}ms` }} />
                     ))}
                   </span>
                 </div>
-              </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-border/60 bg-[image:var(--gradient-hero)] py-14 text-primary-foreground">
+      <section className="relative overflow-hidden border-t border-border/60 bg-[image:var(--gradient-hero)] py-14 text-primary-foreground animate-gradient-x">
+        <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-3xl animate-blob" />
         <div className="mx-auto max-w-4xl px-6 text-center">
           <h2 className="text-3xl font-bold">{t.reviews.ctaTitle}</h2>
           <p className="mt-2 text-primary-foreground/80">{t.reviews.ctaLede}</p>
@@ -90,7 +93,7 @@ function ReviewsPage() {
             href="https://www.google.com/search?q=Riverland+Postal+Fort+Lauderdale"
             target="_blank"
             rel="noreferrer"
-            className="mt-6 inline-flex rounded-lg bg-background px-6 py-3 font-semibold text-foreground shadow-[var(--shadow-soft)]"
+            className="group mt-6 inline-flex overflow-hidden rounded-lg bg-background px-6 py-3 font-semibold text-foreground shadow-[var(--shadow-soft)] transition-all duration-300 hover-shine hover:-translate-y-1 hover:scale-105"
           >
             {t.reviews.ctaBtn}
           </a>
