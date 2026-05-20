@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState, type ReactNode, type CSSProperties, type ElementType } from "react";
+import { useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import type { ReactNode, CSSProperties, ElementType } from "react";
 
 type Props = {
   children: ReactNode;
@@ -9,36 +11,18 @@ type Props = {
 };
 
 export function Reveal({ children, className = "", delay = 0, as: Tag = "div", style }: Props) {
-  const ref = useRef<HTMLElement | null>(null);
-  const [shown, setShown] = useState(false);
+  const reduced = useReducedMotion();
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || shown) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            setShown(true);
-            io.disconnect();
-            break;
-          }
-        }
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.08 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [shown]);
-
-  const Comp = Tag as any;
   return (
-    <Comp
-      ref={ref as any}
-      className={`reveal-init ${shown ? "reveal-in" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms`, ...style }}
+    <motion.div
+      initial={{ opacity: 0, y: reduced ? 0 : 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: reduced ? 0 : 0.5, delay: delay / 1000, ease: "easeOut" }}
+      className={className}
+      style={style}
     >
       {children}
-    </Comp>
+    </motion.div>
   );
 }
